@@ -145,7 +145,7 @@ class Report(object):
             is_user_upload = 1
         try:
             #print(self.phone, self.addr)
-            self.screenshot()
+            self.screenshot() # webpage.png
         except Exception as e:
             print(e)
             print('error!')
@@ -172,13 +172,16 @@ class Report(object):
                     self.pic[idx - 1] = DEFAULT_PIC[idx - 1]
                 #print(self.pic[idx - 1])
                 if can_upload_file:
+                    print("open webpage.png")
                     with open("webpage.png", 'rb') as f:
                         pngfile = f.read() 
                 else:
                     ret = session.get(self.pic[idx - 1])                     
                 if can_upload_file:
+                    print("blob = pngfile")
                     blob = pngfile
                 else:
+                    print("blob = ret.content")
                     blob = ret.content
                 #print(len(blob))
                 #print(ret.status_code)
@@ -212,6 +215,8 @@ class Report(object):
                 # print(sign)
                 
                 url = UPLOAD_IMAGE_URL
+                
+                print("description:", {description})
                 
                 payload = {
                 "_token": _token,
